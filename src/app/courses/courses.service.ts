@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core'
 
 @Injectable()
 export class CoursesService {
+   constructor() {
+      localStorage.setItem('courses', JSON.stringify(Courses))
+   }
+
    getCourses() {
-      return Courses
+      return JSON.parse(localStorage.getItem('courses'))
    }
 }
 
