@@ -12,13 +12,13 @@
               <li class="nested" [class.expand]="showMenu === 'courses'">
                   <ul class="submenu">
                       <li>
-                          <a class="list-group-item">
+                          <a class="list-group-item" [routerLink]="['home/courses/create']">
                               <i class="fa fa-plus"></i>&nbsp;
                               <span> Add Course</span>
                           </a>
                       </li>
                       <li>
-                          <a class="list-group-item">
+                          <a class="list-group-item" [routerLink]="['home/courses']">
                               <i class="fa fa-eye"></i>&nbsp;
                               <span> View Courses </span>
                           </a>

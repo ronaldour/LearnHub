@@ -1,0 +1,9 @@
+<div>
+  <h2>Available Courses</h2>
+  <hr/>
+  <div class="row">
+    <div *ngFor="let course of courses" class="col-md-5">
+      <course-card [course]="course"></course-card>
+    </div>
+  </div>
+</div>

@@ -5,9 +5,13 @@ import { Component } from '@angular/core';
   template: `
     <nav-bar></nav-bar>
     <side-bar></side-bar>
+    <section class="main-container" [ngClass]="{collapsed: collapedSideBar}">
+      <router-outlet></router-outlet>
+    </section>
     `,
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'LearnHub';
+  title = 'LearnHub'
+  collapedSideBar = false
 }
