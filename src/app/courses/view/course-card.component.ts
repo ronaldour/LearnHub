@@ -6,8 +6,11 @@ import { Component, Input } from '@angular/core'
    styles: [`
       .thumbnail { min-height: 210px; }
       .pad-left { margin-left: 10px; }
-      .well div { color: #bbb; }
-      .event-image { height: 50px; margin-bottom: 10px; }
+      .event-image { height: 50px;}
+      .bg-default {
+         background-color: #232323;
+      }
+      a { color: white}
    `]
 })
 

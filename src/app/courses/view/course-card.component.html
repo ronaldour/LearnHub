@@ -1,7 +1,17 @@
-<div class="well hoverwell thumbnail">
-   <img [src]="course?.imageUrl" [alt]="course?.name" class="event-image">
-   <h3>{{course?.name}}</h3>
-   <div>Price: $ {{course?.price}}</div>
-   <div>Release date: {{course?.releaseDate | date}}</div>
-   <div>Level: {{course?.level}}</div>
+<div class="card text-white bg-default mb-3">
+   <div class="card-header">
+      <img [src]="course?.imageUrl" [alt]="course?.name" class="event-image">
+      <span class="float-right">
+         <i class="fa fa-lg fa-minus"></i>&nbsp;
+      </span>
+      <a class="float-right" [routerLink]="['edit', course?.id]">
+         <i class="fa fa-lg fa-edit"></i>&nbsp;&nbsp;&nbsp;
+      </a>
+   </div>
+   <div class="card-body">
+      <h3>{{course?.name}}</h3>
+      <div>Price: $ {{course?.price}}</div>
+      <div>Release date: {{course?.releaseDate | date}}</div>
+      <div>Level: {{course?.level}}</div>
+   </div>
 </div>

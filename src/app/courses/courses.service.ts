@@ -4,19 +4,36 @@ import { ICourse } from './course.model'
 @Injectable()
 export class CoursesService {
 
+   count : number
+
    constructor() {
       if(!localStorage.getItem('courses')) {
          localStorage.setItem('courses', JSON.stringify(Courses))
       }
+
+      this.count = JSON.parse(localStorage.getItem('courses')).length
    }
 
    getCourses() {
       return JSON.parse(localStorage.getItem('courses'))
    }
 
+   getCourse(id : number) {
+      let courses = JSON.parse(localStorage.getItem('courses'))
+      return courses[id]
+   }
+
    addCourse(course : ICourse) {
       let courses = JSON.parse(localStorage.getItem('courses'))
+      course.id = this.count++
+      course.imageUrl = '/assets/angular.png'
       courses.push(course)
+      localStorage.setItem('courses', JSON.stringify(courses))
+   }
+
+   editCourse(course : ICourse) {
+      let courses = JSON.parse(localStorage.getItem('courses'))
+      courses[course.id] = course
       localStorage.setItem('courses', JSON.stringify(courses))
    }
 
@@ -25,7 +42,7 @@ export class CoursesService {
 
 const Courses : ICourse[] = [
    {
-      id: 1,
+      id: 0,
       name: 'PHP for dummies',
       mentor: 'Geovanny Lopez',
       price: 1.99,
@@ -34,7 +51,7 @@ const Courses : ICourse[] = [
       level: 'beginer'
    },
    {
-      id: 2,
+      id: 1,
       name: 'Advanced C++',
       mentor: 'Ronaldo U',
       price: 99.98,
@@ -43,7 +60,7 @@ const Courses : ICourse[] = [
       level: 'advanced'
    },
    {
-      id: 3,
+      id: 2,
       name: 'Assembler',
       mentor: 'Martin P',
       price: 85.99,
@@ -52,7 +69,7 @@ const Courses : ICourse[] = [
       level: 'advanced'
    },
    {
-      id: 4,
+      id: 3,
       name: 'Angular Tour',
       mentor: 'Juanito',
       price: 50.50,
@@ -61,7 +78,7 @@ const Courses : ICourse[] = [
       level: 'intermediate'
    },
    {
-      id: 5,
+      id: 4,
       name: 'Master React',
       mentor: 'Paolo',
       price: 50.50,
