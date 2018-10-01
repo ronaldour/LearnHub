@@ -1,0 +1,10 @@
+.bg-default {
+   background-color: #232323;
+}
+
+.btn-outline-yes {
+   background-color: transparent;
+   color: #f96816;
+   transition: all .5s;
+   border-color: #f96816;
+}

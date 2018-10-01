@@ -3,7 +3,9 @@
   <hr/>
   <div class="row">
     <div *ngFor="let course of courses" class="col-md-3">
-      <course-card [course]="course"></course-card>
+      <course-card [course]="course" [modal]="modal"></course-card>
     </div>
   </div>
 </div>
+
+<delete-course #modal></delete-course>

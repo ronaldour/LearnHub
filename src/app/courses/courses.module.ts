@@ -10,13 +10,15 @@ import { CoursesService } from './courses.service';
 import { CourseCardComponent } from './view/course-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditCourseComponent } from './edit/edit-course.component';
+import { DeleteCourseComponent } from './delete/delete-course.component';
 
 @NgModule({
    declarations: [
       CreateCourseComponent,
       ViewCoursesComponent,
       CourseCardComponent,
-      EditCourseComponent
+      EditCourseComponent,
+      DeleteCourseComponent
    ],
    imports: [
       CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CoursesService } from '../courses.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { ICourse } from '../course.model'
   templateUrl: './edit-course.component.html',
   styleUrls: ['./edit-course.component.css']
 })
-export class EditCourseComponent implements OnInit {
+export class EditCourseComponent implements OnInit, OnDestroy{
   editCourseForm : FormGroup
   name : FormControl
   mentor : FormControl
@@ -29,7 +29,6 @@ export class EditCourseComponent implements OnInit {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.courseId = +params['id']
     })
-    console.log(this.activatedRoute.snapshot.params)
     this.course = this.coursesService.getCourse(this.courseId)
 
     this.name = new FormControl(this.course.name, Validators.required)
@@ -43,6 +42,10 @@ export class EditCourseComponent implements OnInit {
       price: this.price,
       level: this.level
     })
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe()
   }
 
   saveCourse(formValues) {

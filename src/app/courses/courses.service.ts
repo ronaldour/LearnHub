@@ -14,13 +14,23 @@ export class CoursesService {
       this.count = JSON.parse(localStorage.getItem('courses')).length
    }
 
+   private findPosition(id : number) : number{
+      let courses = JSON.parse(localStorage.getItem('courses'))
+      for(let i = 0; i < courses.length; i++) {
+         if(courses[i].id == id) {
+            return i
+         }
+      }
+      return -1
+   }
+
    getCourses() {
       return JSON.parse(localStorage.getItem('courses'))
    }
 
    getCourse(id : number) {
       let courses = JSON.parse(localStorage.getItem('courses'))
-      return courses[id]
+      return courses[this.findPosition(id)]
    }
 
    addCourse(course : ICourse) {
@@ -33,7 +43,16 @@ export class CoursesService {
 
    editCourse(course : ICourse) {
       let courses = JSON.parse(localStorage.getItem('courses'))
-      courses[course.id] = course
+      courses[this.findPosition(course.id)] = course
+      localStorage.setItem('courses', JSON.stringify(courses))
+   }
+
+   deleteCourse(id: number) {
+      let courses : ICourse[] = JSON.parse(localStorage.getItem('courses'))
+      let position = this.findPosition(id)
+      if(position > -1) {
+         courses.splice(position, 1)
+      }
       localStorage.setItem('courses', JSON.stringify(courses))
    }
 

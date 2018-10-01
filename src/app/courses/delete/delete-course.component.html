@@ -1,0 +1,14 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header bg-default">
+        <h4 class="modal-title">Delete</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body bg-default">
+        <p>Do you want to delete the {{ name }} course? </p>
+    </div>
+    <div class="modal-footer bg-default">
+        <button type="button" class="btn btn-outline-yes" (click)="delete()">Yes</button>
+    </div>
+</ng-template>

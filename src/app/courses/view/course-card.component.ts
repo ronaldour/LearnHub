@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core'
+import { DeleteCourseComponent } from '../delete/delete-course.component';
 
 @Component({
    selector: 'course-card',
@@ -16,4 +17,9 @@ import { Component, Input } from '@angular/core'
 
 export class CourseCardComponent {
    @Input() course:any
+   @Input() modal:DeleteCourseComponent
+
+   openModal() {
+      this.modal.openModal(this.course.id, this.course.name)
+   }
 }
