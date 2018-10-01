@@ -1,0 +1,23 @@
+em { float:right; color:#E05C65; padding-left:10px; }
+.btn-outline-primary {
+   color: #f96816;
+   border-color: #f96816;
+}
+
+.btn-outline-save {
+   background-color: transparent;
+   color: #f96816;
+   transition: all .5s;
+   border-color: #f96816;
+}
+
+.btn-outline-cancel {
+   background-color: transparent;
+   color: #aaaaaa;
+   transition: all .5s;
+   border-color: #aaaaaa;
+}
+
+label {
+   color: #aaaaaa;
+}

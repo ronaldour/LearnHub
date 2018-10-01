@@ -2,6 +2,6 @@
    <img [src]="course?.imageUrl" [alt]="course?.name" class="event-image">
    <h3>{{course?.name}}</h3>
    <div>Price: $ {{course?.price}}</div>
-   <div>Release date: {{course?.releaseDate}}</div>
+   <div>Release date: {{course?.releaseDate | date}}</div>
    <div>Level: {{course?.level}}</div>
 </div>

@@ -105,6 +105,9 @@ $topnav-background-color: #222222   ;
 }
 
 .nested-menu {
+    .nested-menu-item {
+        color: inherit !important;
+    }
     .list-group-item {
         cursor: pointer;
     }
@@ -189,3 +192,8 @@ $topnav-background-color: #222222   ;
         display: none;
     }
 }
+
+.sidebar-active {
+    color: #f96816 !important;
+}
+

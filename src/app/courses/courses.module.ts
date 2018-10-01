@@ -8,6 +8,7 @@ import { CreateCourseComponent } from './create/create-course.component';
 import { ViewCoursesComponent } from './view/view-courses.component';
 import { CoursesService } from './courses.service';
 import { CourseCardComponent } from './view/course-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
    declarations: [
@@ -17,6 +18,7 @@ import { CourseCardComponent } from './view/course-card.component';
    ],
    imports: [
       CommonModule,
+      ReactiveFormsModule,
       RouterModule.forChild(CoursesRoutes)
    ],
    providers: [

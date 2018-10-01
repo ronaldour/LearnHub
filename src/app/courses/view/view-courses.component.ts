@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { CoursesService } from '../courses.service';
+import { ICourse } from '../course.model'
 
 @Component({
    templateUrl: './view-courses.component.html',
@@ -7,7 +8,7 @@ import { CoursesService } from '../courses.service';
 })
 
 export class ViewCoursesComponent implements OnInit {
-   courses : any[]
+   courses : ICourse[]
 
    constructor(private coursesService : CoursesService) {
 
