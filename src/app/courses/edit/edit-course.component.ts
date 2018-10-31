@@ -19,7 +19,7 @@ export class EditCourseComponent implements OnInit, OnDestroy{
   mouseoverSave
   course : ICourse
   sub : any
-  courseId : number
+  courseId : string
 
   constructor(private coursesService : CoursesService, private router : Router, private activatedRoute : ActivatedRoute) {
 
@@ -27,20 +27,28 @@ export class EditCourseComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.courseId = +params['id']
+      this.courseId = params['id']
     })
-    this.course = this.coursesService.getCourse(this.courseId)
 
-    this.name = new FormControl(this.course.name, Validators.required)
-    this.mentor = new FormControl(this.course.mentor, Validators.required)
-    this.price = new FormControl(this.course.price, Validators.required)
-    this.level = new FormControl(this.course.level, Validators.required)
+    this.name = new FormControl('', Validators.required)
+    this.mentor = new FormControl('', Validators.required)
+    this.price = new FormControl('', Validators.required)
+    this.level = new FormControl('', Validators.required)
 
     this.editCourseForm = new FormGroup({
       name: this.name,
       mentor: this.mentor,
       price: this.price,
       level: this.level
+    })
+    
+    this.coursesService.getCourse(this.courseId).then(course => {
+      this.course = course
+
+      this.name.setValue(this.course.name)
+      this.mentor.setValue(this.course.mentor)
+      this.price.setValue(this.course.price)
+      this.level.setValue(this.course.level)
     })
   }
 
@@ -50,7 +58,7 @@ export class EditCourseComponent implements OnInit, OnDestroy{
 
   saveCourse(formValues) {
     let course : ICourse = {
-      id: this.course.id,
+      _id: this.course._id,
       name: formValues.name,
       mentor: formValues.mentor,
       price: +formValues.price,
@@ -59,8 +67,10 @@ export class EditCourseComponent implements OnInit, OnDestroy{
       imageUrl: this.course.imageUrl
     }
 
-    this.coursesService.editCourse(course)
-    this.router.navigate(['courses'])
+    this.coursesService.editCourse(course).then(updated => {
+      //If updated { updated correctly }
+      this.router.navigate(['courses'])
+    })
   }
 
   cancel() {

@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core'
 import { ICourse } from './course.model'
+import { environment } from 'environments/environment'
 
 @Injectable()
 export class CoursesService {
 
    count : number
+   readonly coursesAPI : string
 
    constructor() {
-      if(!localStorage.getItem('courses')) {
-         localStorage.setItem('courses', JSON.stringify(Courses))
-      }
-
-      this.count = JSON.parse(localStorage.getItem('courses')).length
+      this.coursesAPI = environment.courses_api_url
    }
 
-   private findPosition(id : number) : number{
+   private findPosition(id : string) : number{
       let courses = JSON.parse(localStorage.getItem('courses'))
       for(let i = 0; i < courses.length; i++) {
          if(courses[i].id == id) {
@@ -24,36 +22,62 @@ export class CoursesService {
       return -1
    }
 
-   getCourses() {
-      return JSON.parse(localStorage.getItem('courses'))
+   async getCourses() : Promise<ICourse[]>{
+      return await fetch(this.coursesAPI, {
+            method: 'GET',
+            headers: {
+               'Cache-Control': 'no-cache'
+            }
+         }).then(response => {
+            return response.json()
+         })
    }
 
-   getCourse(id : number) {
-      let courses = JSON.parse(localStorage.getItem('courses'))
-      return courses[this.findPosition(id)]
+   async getCourse(id : string) : Promise<ICourse>{
+      return await fetch(this.coursesAPI + '/' + id, {
+         method: 'GET',
+         headers: {
+            'Cache-Control': 'no-cache'
+         }
+      }).then(response => {
+         return response.json()
+      })
    }
 
-   addCourse(course : ICourse) {
-      let courses = JSON.parse(localStorage.getItem('courses'))
-      course.id = this.count++
-      course.imageUrl = '/assets/angular.png'
-      courses.push(course)
-      localStorage.setItem('courses', JSON.stringify(courses))
+   async addCourse(course : ICourse) : Promise<boolean> {
+      return await fetch(this.coursesAPI, {
+         method: 'POST',
+         headers: {
+            "Content-Type": "application/json"
+         },
+         body: JSON.stringify({ course: course })
+      }).then(response => {
+         return response.ok
+      })
    }
 
-   editCourse(course : ICourse) {
-      let courses = JSON.parse(localStorage.getItem('courses'))
-      courses[this.findPosition(course.id)] = course
-      localStorage.setItem('courses', JSON.stringify(courses))
+   async editCourse(course : ICourse) {
+      return await fetch(this.coursesAPI + '/' + course._id, {
+         method: 'PUT',
+         headers: {
+            "Content-Type": "application/json",
+            'Cache-Control': 'no-cache'
+         },
+         body: JSON.stringify({ course: course })
+      }).then(response => {
+         return response.ok
+      })
    }
 
-   deleteCourse(id: number) {
-      let courses : ICourse[] = JSON.parse(localStorage.getItem('courses'))
-      let position = this.findPosition(id)
-      if(position > -1) {
-         courses.splice(position, 1)
-      }
-      localStorage.setItem('courses', JSON.stringify(courses))
+   async deleteCourse(id: string) {
+      return await fetch(this.coursesAPI + '/' + id, {
+         method: 'DELETE',
+         headers: {
+            'Cache-Control': 'no-cache'
+         }
+      }).then(response => {
+         return response.ok
+      })
    }
 
 
@@ -61,7 +85,7 @@ export class CoursesService {
 
 const Courses : ICourse[] = [
    {
-      id: 0,
+      _id: "0",
       name: 'PHP for dummies',
       mentor: 'Geovanny Lopez',
       price: 1.99,
@@ -70,7 +94,7 @@ const Courses : ICourse[] = [
       level: 'beginer'
    },
    {
-      id: 1,
+      _id: "1",
       name: 'Advanced C++',
       mentor: 'Ronaldo U',
       price: 99.98,
@@ -79,7 +103,7 @@ const Courses : ICourse[] = [
       level: 'advanced'
    },
    {
-      id: 2,
+      _id: "2",
       name: 'Assembler',
       mentor: 'Martin P',
       price: 85.99,
@@ -88,7 +112,7 @@ const Courses : ICourse[] = [
       level: 'advanced'
    },
    {
-      id: 3,
+      _id: "3",
       name: 'Angular Tour',
       mentor: 'Juanito',
       price: 50.50,
@@ -97,7 +121,7 @@ const Courses : ICourse[] = [
       level: 'intermediate'
    },
    {
-      id: 4,
+      _id: "4",
       name: 'Master React',
       mentor: 'Paolo',
       price: 50.50,

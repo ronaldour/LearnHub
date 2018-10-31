@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CoursesService } from '../courses.service';
 import { Router } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'delete-course',
@@ -10,9 +11,10 @@ import { Router } from '@angular/router';
 })
 export class DeleteCourseComponent {
   @ViewChild('content') private content
+  @Output() deleted = new EventEmitter<boolean>()
   
   closeResult: string;
-  id : number
+  id : string
   name: string
   constructor(private modalService: NgbModal, private coursesService: CoursesService, private router : Router) { }
 
@@ -24,7 +26,7 @@ export class DeleteCourseComponent {
       });
   }
 
-  openModal(id : number, name : string) {
+  openModal(id : string, name : string) {
     this.id = id
     this.name = name
     this.open(this.content)
@@ -41,9 +43,11 @@ export class DeleteCourseComponent {
   }
 
   delete() {
-    this.coursesService.deleteCourse(this.id)
+    this.coursesService.deleteCourse(this.id).then(deleted => {
+        //if deleted { deleted correctly}
+        this.deleted.emit(deleted)
+    })
     this.modalService.dismissAll()
-
-    window.location.reload();
+    
   }
 }

@@ -1,10 +1,10 @@
-<div class="card text-white bg-default mb-3" [id]="course.id">
+<div class="card text-white bg-default mb-3" [id]="course._id">
    <div class="card-header">
       <img [src]="course?.imageUrl" [alt]="course?.name" class="event-image">
       <span class="float-right" style="cursor: pointer;" (click)="openModal()">
          <i class="fa fa-lg fa-minus"></i>&nbsp;
       </span>
-      <a class="float-right" [routerLink]="['edit', course?.id]">
+      <a class="float-right" [routerLink]="['edit', course?._id]">
          <i class="fa fa-lg fa-edit"></i>&nbsp;&nbsp;&nbsp;
       </a>
    </div>

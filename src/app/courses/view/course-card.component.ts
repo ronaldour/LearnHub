@@ -20,6 +20,6 @@ export class CourseCardComponent {
    @Input() modal:DeleteCourseComponent
 
    openModal() {
-      this.modal.openModal(this.course.id, this.course.name)
+      this.modal.openModal(this.course._id, this.course.name)
    }
 }

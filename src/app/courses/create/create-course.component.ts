@@ -38,16 +38,19 @@ export class CreateCourseComponent implements OnInit {
 
    saveCourse(formValues) {
       let course : ICourse = {
-         id: undefined,
+         _id: undefined,
          name: formValues.name,
          mentor: formValues.mentor,
+         imageUrl: '/assets/cpp.png',
          price: +formValues.price,
          level: formValues.level,
          releaseDate: new Date()
       }
 
-      this.coursesService.addCourse(course)
-      this.router.navigate(['courses'])
+      this.coursesService.addCourse(course).then(created => {
+         //Created correctly
+         this.router.navigate(['courses'])
+      })
    }
 
    cancel() {
