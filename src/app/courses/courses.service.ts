@@ -5,21 +5,10 @@ import { environment } from 'environments/environment'
 @Injectable()
 export class CoursesService {
 
-   count : number
    readonly coursesAPI : string
 
    constructor() {
       this.coursesAPI = environment.courses_api_url
-   }
-
-   private findPosition(id : string) : number{
-      let courses = JSON.parse(localStorage.getItem('courses'))
-      for(let i = 0; i < courses.length; i++) {
-         if(courses[i].id == id) {
-            return i
-         }
-      }
-      return -1
    }
 
    async getCourses() : Promise<ICourse[]>{
@@ -79,54 +68,4 @@ export class CoursesService {
          return response.ok
       })
    }
-
-
 }
-
-const Courses : ICourse[] = [
-   {
-      _id: "0",
-      name: 'PHP for dummies',
-      mentor: 'Geovanny Lopez',
-      price: 1.99,
-      imageUrl: '/assets/php.png',
-      releaseDate: new Date('05/06/2018'),
-      level: 'beginer'
-   },
-   {
-      _id: "1",
-      name: 'Advanced C++',
-      mentor: 'Ronaldo U',
-      price: 99.98,
-      imageUrl: '/assets/cpp.png',
-      releaseDate: new Date('05/10/2018'),
-      level: 'advanced'
-   },
-   {
-      _id: "2",
-      name: 'Assembler',
-      mentor: 'Martin P',
-      price: 85.99,
-      imageUrl: '/assets/asm.png',
-      releaseDate: new Date('07/07/1999'),
-      level: 'advanced'
-   },
-   {
-      _id: "3",
-      name: 'Angular Tour',
-      mentor: 'Juanito',
-      price: 50.50,
-      imageUrl: '/assets/angular.png',
-      releaseDate: new Date('06/06/2018'),
-      level: 'intermediate'
-   },
-   {
-      _id: "4",
-      name: 'Master React',
-      mentor: 'Paolo',
-      price: 50.50,
-      imageUrl: '/assets/react.png',
-      releaseDate: new Date('06/06/2018'),
-      level: 'intermediate'
-   }
-]
