@@ -1,25 +1,28 @@
-import { Component, OnInit, OnChanges, AfterContentChecked, AfterViewChecked, AfterViewInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { CoursesService } from '../courses.service';
 import { ICourse } from '../course.model'
+import { NgxSpinnerService } from 'ngx-spinner'
 
 @Component({
    templateUrl: './view-courses.component.html',
    styleUrls: [ './view-courses.component.css' ]
 })
 
-export class ViewCoursesComponent implements AfterViewInit {
+export class ViewCoursesComponent implements OnInit {
    courses : ICourse[]
 
-   constructor(private coursesService : CoursesService) {
+   constructor(private coursesService : CoursesService, private spinner: NgxSpinnerService) {
 
    }
 
-   ngAfterViewInit() {
+   ngOnInit() {
       this.fetchCourses()
    }
 
    private fetchCourses() {
+      this.spinner.show()
       this.coursesService.getCourses().then(courses => {
+         this.spinner.hide()
          this.courses = courses
       })
    }

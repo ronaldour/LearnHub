@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditCourseComponent } from './edit/edit-course.component';
 import { DeleteCourseComponent } from './delete/delete-course.component';
 
+import { NgxSpinnerModule } from 'ngx-spinner'
+
 @NgModule({
    declarations: [
       CreateCourseComponent,
@@ -23,7 +25,8 @@ import { DeleteCourseComponent } from './delete/delete-course.component';
    imports: [
       CommonModule,
       ReactiveFormsModule,
-      RouterModule.forChild(CoursesRoutes)
+      RouterModule.forChild(CoursesRoutes),
+      NgxSpinnerModule
    ],
    providers: [
       CoursesService
