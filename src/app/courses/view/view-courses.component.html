@@ -1,18 +1,18 @@
-<div class="container">
+<div>
   <h2>Available Courses</h2>
   <hr/>
   <div class="row">
-    <ngx-spinner
-    bdColor = "rgba(51,51,51,0)"
-    size = "default"
-    color = "#ffffff"
-    type = "ball-clip-rotate"
-    ></ngx-spinner>
-  
     <div *ngFor="let course of courses" class="col-md-3">
       <course-card [course]="course" [modal]="modal"></course-card>
     </div>
   </div>
 </div>
-
+<div style="position:relative; min-height: 500px;">
+  <ngx-spinner
+    bdColor = "rgba(51,51,51,0)"
+    size = "default"
+    color = "#ffffff"
+    type = "ball-clip-rotate"
+    ></ngx-spinner>
+</div>
 <delete-course #modal (deleted)="onDeleted($event)"></delete-course>
