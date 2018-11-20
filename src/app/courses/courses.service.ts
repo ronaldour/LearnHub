@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core'
 import { ICourse } from './course.model'
-import { environment } from 'environments/environment'
+
+import { AppConfigService } from '../config.service';
 
 @Injectable()
 export class CoursesService {
 
    readonly coursesAPI : string
 
-   constructor() {
-      this.coursesAPI = environment.courses_api_url
+   constructor(private environment : AppConfigService) {
+      this.coursesAPI = environment.config.backendAPI
    }
 
    async getCourses() : Promise<ICourse[]>{
