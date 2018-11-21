@@ -23,6 +23,10 @@ export class ViewCoursesComponent implements OnInit {
       this.spinner.show()
       this.coursesService.getCourses().then(courses => {
          this.spinner.hide()
+         if(!courses){
+            console.log("couldn't connect to the server")
+            return
+         }
          this.courses = courses
       })
    }

@@ -19,7 +19,12 @@ export class CoursesService {
                'Cache-Control': 'no-cache'
             }
          }).then(response => {
-            return response.json()
+            if(!!response){
+               return response.json()
+            }
+            else {
+               return false
+            }
          })
    }
 
@@ -30,7 +35,12 @@ export class CoursesService {
             'Cache-Control': 'no-cache'
          }
       }).then(response => {
-         return response.json()
+         if(!!response){
+            return response.json()
+         }
+         else {
+            return false
+         }
       })
    }
 
@@ -42,7 +52,12 @@ export class CoursesService {
          },
          body: JSON.stringify({ course: course })
       }).then(response => {
-         return response.ok
+         if(!!response){
+            return response.ok
+         }
+         else {
+            return false
+         }
       })
    }
 
@@ -55,7 +70,12 @@ export class CoursesService {
          },
          body: JSON.stringify({ course: course })
       }).then(response => {
-         return response.ok
+         if(!!response){
+            return response.ok
+         }
+         else {
+            return false
+         }
       })
    }
 
@@ -66,7 +86,12 @@ export class CoursesService {
             'Cache-Control': 'no-cache'
          }
       }).then(response => {
-         return response.ok
+         if(!!response){
+            return response.ok
+         }
+         else {
+            return false
+         }
       })
    }
 }

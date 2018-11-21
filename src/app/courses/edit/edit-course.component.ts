@@ -43,6 +43,10 @@ export class EditCourseComponent implements OnInit, OnDestroy{
     })
     
     this.coursesService.getCourse(this.courseId).then(course => {
+      if(!course){
+        console.log("couldn't connect to the server")
+        return
+      }
       this.course = course
 
       this.name.setValue(this.course.name)
